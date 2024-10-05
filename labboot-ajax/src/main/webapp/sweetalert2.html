@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/sweetalert2@11.12.4/dist/sweetalert2.all.min.js"></script>
+    <script>
+        function doclick1() {
+            Swal.fire({
+                title: "Labboot",
+                text: "Loading......",
+                showConfirmButton: false,
+                allowOutsideClick: false,
+            });
+
+            setTimeout(function() {
+                Swal.close();
+            }, 5000);
+        }
+        function doclick2() {
+            Swal.fire({
+                title: "Labboot",
+                text: "Loading......",
+                icon: "success",
+            });
+        }
+
+        function doclick3() {
+            Swal.fire({
+                title: "Labboot",
+                text: "確定？",
+                icon: "question",
+                confirmButtonText: "確定",
+                showCancelButton: true,
+                cancelButtonText: "取消",
+                allowOutsideClick: false,
+            }).then(function(result) {
+                console.log("result", result);
+                if(result.isConfirmed) {
+                    console.log("ok");
+                }
+            });
+        }
+
+        async function doclick4() {
+            const result = await Swal.fire({
+                title: "Labboot",
+                text: "確定嗎？",
+                icon: "question",
+                confirmButtonText: "確定",
+                showCancelButton: true,
+                cancelButtonText: "取消",
+                allowOutsideClick: false,
+            });
+
+            console.log("result", result);
+            if(result.isConfirmed) {
+                console.log("ok");
+            }
+        }
+        function doclick5() {
+            Swal.fire({
+                title: "Labboot",
+                text: "Loading......",
+                icon: "success",
+                showCancelButton: true,
+                customClass: {
+                    confirmButton: "btn btn-success",
+                    cancelButton: "btn btn-danger"
+                },
+                buttonsStyling: false
+            });
+        }
+    </script>
+</head>
+<body>
+    <button type="button" onclick="doclick1()">SweetAlert 1</button>
+    <button type="button" onclick="doclick2()">SweetAlert 2</button>
+    <button type="button" onclick="doclick3()">SweetAlert 3</button>
+    <button type="button" onclick="doclick4()">SweetAlert 4</button>
+    <button type="button" onclick="doclick5()">SweetAlert 5</button>
+</body>
+</html>
