@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: labboot-hibernate
+  datasource:
+    username: sa
+    password: P@ssw0rd
+    url: jdbc:sqlserver://localhost:9433;database=java;trustServerCertificate=true
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.SQLServerDialect
+  output:
+    ansi:
+      enabled: always

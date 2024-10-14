@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajax</title>
+    <script src="https://unpkg.com/sweetalert2@11.10.7/dist/sweetalert2.all.min.js"></script>
+    <script src="https://unpkg.com/axios@1.6.8/dist/axios.min.js"></script>
+    <script>
+        async function login() {
+            Swal.fire({
+                text: "Loading......",
+                showConfirmButton: false,
+                allowOutsideClick: false,
+            });
+            
+            let data = {
+                "username": "Alex",
+                "password": "A"
+            };
+            try {
+	            const response = await axios.post("http://localhost:8080/ajax/secure/login", data);
+	            console.log("response", response);
+	            if(response.data.success) {
+	                Swal.fire({
+	                    text: response.data.message,
+	                    icon: 'success',
+	                    allowOutsideClick: false,
+	                    confirmButtonText: '確認',
+	                });
+	            } else {
+	                Swal.fire({
+	                    text: response.data.message,
+	                    icon: 'warning',
+	                    allowOutsideClick: false,
+	                    confirmButtonText: '確認',
+	                });
+	            }
+			} catch(error) {
+                console.log("error", error);
+                Swal.fire({
+                    text: '登入失敗：'+error.message,
+                    icon: 'error',
+                    allowOutsideClick: false,
+                    confirmButtonText: '確認',
+                });
+			}
+        }
+        async function callFindById() {
+            Swal.fire({
+                text: "Loading......",
+                showConfirmButton: false,
+                allowOutsideClick: false,
+            });
+            
+            try {
+            	const response = await axios.get("http://localhost:8080/ajax/pages/products/5");
+				console.log("response", response);
+                setTimeout(function() {
+                    Swal.close();
+                }, 500);
+			} catch(error) {
+				console.log("callFindById error", error);
+                Swal.fire({
+                    text: '失敗：'+error.message,
+                    icon: 'error',
+                    allowOutsideClick: false,
+                    confirmButtonText: '確認',
+                });
+			}
+        }
+        async function callFind() {
+            console.log("callFind");
+            Swal.fire({
+                text: "Loading......",
+                showConfirmButton: false,
+                allowOutsideClick: false,
+            });            
+            let data = {
+                "start": 0,
+                "rows": 3,
+                "dir": true,
+                "order": "id",
+                "name": "a"
+            };
+            try {
+				const response = await axios.post("http://localhost:8080/ajax/pages/products/find", data);
+				console.log("response", response);
+                setTimeout(function() {
+                    Swal.close();
+                }, 500);
+			} catch(error) {
+				console.log("callFind error", error);
+                Swal.fire({
+                    text: '失敗：'+error.message,
+                    icon: 'error',
+                    allowOutsideClick: false,
+                    confirmButtonText: '確認',
+                });
+			}
+        }
+        async function callCreate() {
+            console.log("callCreate");
+            Swal.fire({
+                text: "Loading......",
+                showConfirmButton: false,
+                allowOutsideClick: false,
+            });
+            let data = {
+				id: 1000,
+				name: "hahaha",
+				price: 1.2,
+				make: "2024-04-16",
+				expire: 3,
+			};
+			try {
+				const response = await axios.post("http://localhost:8080/ajax/pages/products", data);
+				if(response.data.success) {
+                    Swal.fire({
+                        text: response.data.message,
+                        icon: 'success',
+                        allowOutsideClick: false,
+                        confirmButtonText: '確認',
+                    }).then(function() {
+                        console.log("create success");
+
+                    });
+				} else {
+                    Swal.fire({
+                        text: response.data.message,
+                        icon: 'warning',
+                        allowOutsideClick: false,
+                        confirmButtonText: '確認',
+                    });
+				}
+			} catch(error) {
+				console.log("callCreate error", error);
+                Swal.fire({
+                    text: '失敗：'+error.message,
+                    icon: 'error',
+                    allowOutsideClick: false,
+                    confirmButtonText: '確認',
+                });
+			}
+        }
+        async function callModify() {
+            console.log("callModify");
+            Swal.fire({
+                text: "Loading......",
+                showConfirmButton: false,
+                allowOutsideClick: false,
+            });
+			let data = {
+				id: 1000,
+				name: "hehehe",
+				price: 4.5,
+				make: "2024-04-30",
+				expire: 6,
+			};
+			try {
+				const response = await axios.put("http://localhost:8080/ajax/pages/products/1000", data);
+                if(response.data.success) {
+                    Swal.fire({
+                        text: response.data.message,
+                        icon: 'success',
+                        allowOutsideClick: false,
+                        confirmButtonText: '確認',
+                    }).then(function() {
+                        console.log("update success");
+
+                    });
+                } else {
+                    Swal.fire({
+                        text: response.data.message,
+                        icon: 'warning',
+                        allowOutsideClick: false,
+                        confirmButtonText: '確認',
+                    });
+                }
+			} catch(error) {
+				console.log("callModify error", error);
+                Swal.fire({
+                    text: '失敗：'+error.message,
+                    icon: 'error',
+                    allowOutsideClick: false,
+                    confirmButtonText: '確認',
+                });
+			}
+        }
+        function callRemove() {
+            Swal.fire({
+                text: "確定刪除？",
+                icon: 'warning',
+                allowOutsideClick: false,
+                confirmButtonText: '確認',
+                showCancelButton: true,
+                cancelButtonText: '取消',
+            }).then(async function (result) {
+                if (result.isConfirmed) {
+                    Swal.fire({
+                        text: "Loading......",
+                        showConfirmButton: false,
+                        allowOutsideClick: false,
+                    });
+		            try {
+						const response = await axios.delete("http://localhost:8080/ajax/pages/products/1000");
+                        if(response.data.success) {
+                            Swal.fire({
+                                text: response.data.message,
+                                icon: 'success',
+                                allowOutsideClick: false,
+                                confirmButtonText: '確認',
+                            }).then(function() {
+                                console.log("delete success");
+
+                            });
+                        } else {
+                            Swal.fire({
+                                text: response.data.message,
+                                icon: 'warning',
+                                allowOutsideClick: false,
+                                confirmButtonText: '確認',
+                            });
+                        }
+		
+					} catch(error) {
+                        console.log("callRemove error", error);
+                        Swal.fire({
+                            text: '失敗：'+error.message,
+                            icon: 'error',
+                            allowOutsideClick: false,
+                            confirmButtonText: '確認',
+                        });
+					}
+                }
+            });
+
+        }
+    </script>
+</head>
+<body>
+    <button type="button" onclick="login()">登入</button>
+    <button type="button" onclick="callFindById()">查詢1筆資料</button>
+    <button type="button" onclick="callFind()">查詢多筆資料</button>
+    <button type="button" onclick="callCreate()">新增資料</button>
+    <button type="button" onclick="callModify()">修改資料</button>
+    <button type="button" onclick="callRemove()">刪除資料</button>
+
+</body>
+</html>
