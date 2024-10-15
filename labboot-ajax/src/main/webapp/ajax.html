@@ -19,7 +19,7 @@
                 "password": "A"
             };
             try {
-	            const response = await axios.post("http://localhost:8080/ajax/secure/login", data);
+	            const response = await axios.post("http://localhost:8082/ajax/secure/login", data);
 	            console.log("response", response);
 	            if(response.data.success) {
 	                Swal.fire({
@@ -54,7 +54,7 @@
             });
             
             try {
-            	const response = await axios.get("http://localhost:8080/ajax/pages/products/5");
+            	const response = await axios.get("http://localhost:8082/ajax/pages/products/5");
 				console.log("response", response);
                 setTimeout(function() {
                     Swal.close();
@@ -84,7 +84,7 @@
                 "name": "a"
             };
             try {
-				const response = await axios.post("http://localhost:8080/ajax/pages/products/find", data);
+				const response = await axios.post("http://localhost:8082/ajax/pages/products/find", data);
 				console.log("response", response);
                 setTimeout(function() {
                     Swal.close();
@@ -114,7 +114,7 @@
 				expire: 3,
 			};
 			try {
-				const response = await axios.post("http://localhost:8080/ajax/pages/products", data);
+				const response = await axios.post("http://localhost:8082/ajax/pages/products", data);
 				if(response.data.success) {
                     Swal.fire({
                         text: response.data.message,
@@ -158,7 +158,7 @@
 				expire: 6,
 			};
 			try {
-				const response = await axios.put("http://localhost:8080/ajax/pages/products/1000", data);
+				const response = await axios.put("http://localhost:8082/ajax/pages/products/1000", data);
                 if(response.data.success) {
                     Swal.fire({
                         text: response.data.message,
@@ -203,7 +203,7 @@
                         allowOutsideClick: false,
                     });
 		            try {
-						const response = await axios.delete("http://localhost:8080/ajax/pages/products/1000");
+						const response = await axios.delete("http://localhost:8082/ajax/pages/products/1000");
                         if(response.data.success) {
                             Swal.fire({
                                 text: response.data.message,
