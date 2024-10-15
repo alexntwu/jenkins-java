@@ -4,7 +4,7 @@ spring:
   datasource:
     username: sa
     password: P@ssw0rd
-    url: jdbc:sqlserver://localhost:9433;database=java;trustServerCertificate=true
+    url: jdbc:sqlserver://172.17.0.2:1433;database=java;trustServerCertificate=true
     driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
   jpa:
     show-sql: true
